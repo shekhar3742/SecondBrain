@@ -43,7 +43,7 @@ function Dashboard() {
                   }
                 });
 
-                const shareUrl = `http://localhost:5173/share/${response.data.hash}`
+                const shareUrl = `${window.location.origin}/share/${response.data.hash}`
                 await navigator.clipboard.writeText(shareUrl)
                 alert("Copied to clipboard!");
               } catch (error) {
