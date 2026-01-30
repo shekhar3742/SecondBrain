@@ -13,32 +13,37 @@ export const Signin = () => {
 
     const navigate = useNavigate()
     async function signin() {
-        const username = usernameRef.current?.value
-        const password = passwordRef.current?.value
+    const username = usernameRef.current?.value;
+    const password = passwordRef.current?.value;
 
-        if (!username || !password) {
-            alert('Please enter username and password')
-            return
-        }
-
-        const token = localStorage.getItem("token");
-        if (token) {
-            navigate("/dashboard");
-        }
-        try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/signin`, {
-                username,
-                password,
-            });
-            const jwt = response.data.token
-            localStorage.setItem('token', jwt)
-        } catch (err) {
-            alert("Signin failed. Please try again.");
-           
-            console.error(err);
-            return
-        }
+    if (!username || !password) {
+        alert("Please enter username and password");
+        return;
     }
+
+    try {
+        const response = await axios.post(`${BACKEND_URL}/api/v1/signin`, {
+            username,
+            password,
+        });
+
+        const jwt = response.data.token;
+
+        if (!jwt) {
+            throw new Error("No token received");
+        }
+
+        localStorage.setItem("token", jwt);
+        navigate("/dashboard"); 
+    } catch (err) {
+       
+        localStorage.removeItem("token");
+
+        alert("Signin failed. Please check your credentials.");
+        console.error(err);
+    }
+}
+
 
 
 
@@ -52,7 +57,7 @@ export const Signin = () => {
             </div>
             <div className="flex flex-col justify-center gap-5 mb-2">
                 <Input type="text" reference={usernameRef} placeholder="Username" />
-                <Input type="passowrd" reference={passwordRef} placeholder="Password" />
+                <Input type="password" reference={passwordRef} placeholder="Password" />
                 <Button onClick={signin} loading={false} variant="primary" text="Signin" />
             </div>
             <p>
