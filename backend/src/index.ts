@@ -17,9 +17,16 @@ mongoose.connect(
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: [
+    "http://localhost:5173",    
+    "https://second-brain-c7ye.vercel.app/"
+  ],
+  credentials: true
+}));
 
 const PORT =  4002;
+
 
 
 
