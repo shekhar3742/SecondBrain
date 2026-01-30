@@ -18,17 +18,20 @@ mongoose.connect(
 const app = express()
 app.use(cors({
   origin: [
-    "http://localhost:5173",    
-     "https://second-brain-c7ye-git-main-shekhar3742s-projects.vercel.app",
+    "http://localhost:5173",
+    "https://second-brain-c7ye.vercel.app",
+    "https://second-brain-c7ye-git-main-shekhar3742s-projects.vercel.app"
   ],
   credentials: true
 }));
+
+
 app.use(express.json())
 
 const PORT =  4002;
 
 //signup route
-app.post('/api/v1/signup/', async (req, res) => {
+app.post('/api/v1/signup', async (req, res) => {
     
     const { username, password } = req.body;
 
@@ -69,7 +72,7 @@ app.post('/api/v1/signup/', async (req, res) => {
 
 })
 
-app.post('/api/v1/signin/', async (req, res) => {
+app.post('/api/v1/signin', async (req, res) => {
     try {
         const username = req.body.username
         const password = req.body.password
@@ -118,7 +121,7 @@ app.post('/api/v1/signin/', async (req, res) => {
     }
 })
 
-app.post('/api/v1/content/', userMiddleware, async (req, res) => {
+app.post('/api/v1/content', userMiddleware, async (req, res) => {
     const link = req.body.link;
     const type = req.body.type;
     const title = req.body.title;
@@ -138,7 +141,7 @@ app.post('/api/v1/content/', userMiddleware, async (req, res) => {
 
 })
 
-app.get('/api/v1/content/', userMiddleware, async (req, res) => {
+app.get('/api/v1/content', userMiddleware, async (req, res) => {
     //@ts-ignore
     const userId = req.userId
     const content = await ContentModel.find({
