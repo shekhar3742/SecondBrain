@@ -16,19 +16,16 @@ mongoose.connect(
 
 
 const app = express()
-app.use(express.json())
 app.use(cors({
   origin: [
     "http://localhost:5173",    
-    "https://second-brain-c7ye.vercel.app/"
+     "https://second-brain-c7ye-git-main-shekhar3742s-projects.vercel.app",
   ],
   credentials: true
 }));
+app.use(express.json())
 
 const PORT =  4002;
-
-
-
 
 //signup route
 app.post('/api/v1/signup/', async (req, res) => {
