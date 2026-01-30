@@ -17,13 +17,9 @@ mongoose.connect(
 
 const app = express()
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://second-brain-c7ye.vercel.app",
-    "https://second-brain-c7ye-git-main-shekhar3742s-projects.vercel.app"
-  ],
-  credentials: true
+  origin: "*",
 }));
+
 
 
 app.use(express.json())
