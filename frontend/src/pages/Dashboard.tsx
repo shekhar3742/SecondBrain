@@ -65,12 +65,7 @@ function Dashboard() {
         </div>
 
         <div className='flex justify-around items-center flex-col sm:flex-row flex-wrap'>
-          {/* <Card
-            title='My Setup'
-            link='https://x.com/rajscriptsX/status/1942073859769073756'
-            type='twitter'
-            detail=''
-          /> */}
+          
           {contents.map(({ _id,title, link, type, detail }) =>
             <Card
               key={_id}

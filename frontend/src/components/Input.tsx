@@ -1,7 +1,7 @@
 
 interface InputProps {
     placeholder: string;
-    reference?: React.RefObject<HTMLInputElement>;
+    reference?: React.RefObject<HTMLInputElement | null>;
     type: string;
 }
 
@@ -17,3 +17,4 @@ export function Input({ placeholder, reference, type }: InputProps) {
         </div>
     )
 }
+
