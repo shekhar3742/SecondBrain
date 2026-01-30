@@ -1,15 +1,26 @@
-import { Navigate, Outlet } from "react-router-dom";
-
-const ProtectedRoute = () => {
-  const token = localStorage.getItem("token");
+import { Navigate, useLocation } from "react-router-dom";
+import type { ReactNode } from "react";
 
 
-  if (!token) {
-    return <Navigate to="/signin" replace />;
-  }
-
-  
-  return <Outlet />;
+type RequireAuthProps = {
+  children: ReactNode;
 };
 
-export default ProtectedRoute;
+const RequireAuth = ({ children }: RequireAuthProps) => {
+  const token = localStorage.getItem("token");
+  const location = useLocation();
+
+  const isAuthenticated =
+    token &&
+    token !== "undefined" &&
+    token !== "null" &&
+    token.trim() !== "";
+
+  if (!isAuthenticated) {
+    return <Navigate to="/signin" replace state={{ from: location }} />;
+  }
+
+  return <>{children}</>;
+};
+
+export default RequireAuth;
