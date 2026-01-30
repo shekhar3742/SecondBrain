@@ -34,7 +34,9 @@ export const Signin = () => {
             localStorage.setItem('token', jwt)
         } catch (err) {
             alert("Signin failed. Please try again.");
+           
             console.error(err);
+            return
         }
     }
 
